@@ -1,0 +1,6 @@
+{
+    "name": "@code-exams/solutions",
+    "dependencies": {
+        "@code-exams/problems": "*"
+      }
+}
