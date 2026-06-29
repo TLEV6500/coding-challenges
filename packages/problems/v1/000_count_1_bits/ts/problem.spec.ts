@@ -1,55 +1,12 @@
 import { describe, expect, it } from "bun:test"
 import { CountBits, TestData } from "./problem.types";
-import { LanguageAdapter } from "../../../../languages/LanguageAdapter";
-import { getLanguageAdapter } from "../../../../languages";
+import { getFunction } from "utils/getFunction";
+import { ensureEnvVars } from "utils/ensureEnvVars";
 
-const solutionPath = process.env.SOLUTION_PATH;
-const variantName = process.env.SOLUTION_VARIANT;
-const language = process.env.SOLUTION_LANGUAGE;
+const { solutionPath, variantName, language } = ensureEnvVars();
+const solutionFunction = await getFunction<CountBits>(solutionPath, variantName, language);
 
-if (!solutionPath || !variantName || !language) {
-    throw new Error("SOLUTION_PATH, SOLUTION_VARIANT, and SOLUTION_LANGUAGE environment variables must be set");
-}
-
-const languageAdapter: LanguageAdapter = getLanguageAdapter(language)
-let solutionFunction: CountBits
-try {
-    solutionFunction = await languageAdapter.importFunction<CountBits>(solutionPath)
-} catch (err) {
-    console.error(`Failed to import solution function for "${variantName}": ${err}`)
-    process.exit(1)
-}
-
-const testCases: TestData = {
-    "case_1": {
-        input: 5,
-        expected: {
-            count: 2,
-            indices: [0, 2],
-        },
-    },
-    "case_2": {
-        input: 0,
-        expected: {
-            count: 0,
-            indices: [],
-        },
-    },
-    "case_3": {
-        input: 7,
-        expected: {
-            count: 3,
-            indices: [0, 1, 2],
-        },
-    },
-    "case_4": {
-        input: 13,
-        expected: {
-            count: 3,
-            indices: [0, 1, 3],
-        },
-    },
-}
+const { default: testCases }: { default: TestData } = await import("../test-data/set-1.json")
 
 for (const [name, { input, expected }] of Object.entries(testCases)) {
     describe(`000_count_1_bits using ${name} on ${variantName}`, () => {

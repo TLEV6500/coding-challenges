@@ -1,3 +1,8 @@
 {
-    "name": "@code-exams/problems"
+    "name": "@code-exams/problems",
+    "version": "1.0.0",
+    "type": "module",
+    "dependencies": {
+        "@code-exams/languages": "*"
+      }
 }

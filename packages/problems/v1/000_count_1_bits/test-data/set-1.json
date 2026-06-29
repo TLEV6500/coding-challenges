@@ -1,0 +1,30 @@
+{
+    "case_1": {
+        "input": 5,
+        "expected": {
+            "count": 2,
+            "indices": [0, 2]
+        }
+    },
+    "case_2": {
+        "input": 0,
+        "expected": {
+            "count": 0,
+            "indices": []
+        }
+    },
+    "case_3": {
+        "input": 7,
+        "expected": {
+            "count": 3,
+            "indices": [0, 1, 2]
+        }
+    },
+    "case_4": {
+        "input": 13,
+        "expected": {
+            "count": 3,
+            "indices": [0, 1, 3]
+        }
+    }
+}

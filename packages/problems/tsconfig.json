@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@code-exams/languages/*": ["../languages/*"]
+    }
+  }
+}
